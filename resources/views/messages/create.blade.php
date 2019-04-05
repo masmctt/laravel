@@ -9,26 +9,7 @@
 		{{-- expr --}}
 	<form method="POST" action=" {{ route('mensajes.store') }}">
 		{{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
-		<!--esto es mejor-->
-		{{ csrf_field() }}
-		@if (auth()->guest())
-			<p><label for="nombre">
-				Nombre
-				<input class="form-control" type="text" name="nombre" value="{{ old('nombre') }}">
-				{!! $errors->first('nombre','<span class=error>:message</span>') !!}
-			</label></p>
-			<p><label for="email">
-				email
-				<input class="form-control" type="email" name="email" value="{{ old('email') }}">
-				{!! $errors->first('email','<span class=error>:message</span>') !!}
-			</label></p>
-		@endif
-		<p><label for="mensaje">
-			Mensaje
-			<textarea class="form-control" name="mensaje">{{ old('mensaje') }}</textarea>
-			{!! $errors->first('mensaje','<span class=error>:message</span>') !!}
-		</label></p>
-		<input class="btn btn-primary" type="submit" value="Enviar">
+		@include('messages.form',['message' => new App\Message])
 
 	</form>
 	@endif
