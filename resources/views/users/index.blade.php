@@ -1,7 +1,8 @@
 @extends('layout')
 
 @section('contenido')
-	<h1>Usuarios todos</h1>
+	<h1>Usuarios</h1>
+	<a class="btn btn-primary" href="{{ route('usuarios.create') }}">Crear nuevo usuario</a>
 	<table class="table">
 		<thead>
 			<tr>

@@ -2,21 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
-use App\User;
+use App\Area;
+use App\Division;
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdateUserRequest;
 
-class UsersController extends Controller
+class DivisionController extends Controller
 {
-    function __construct()
-    {
-        // $this->middleware('auth');
-        // $this->middleware('roles'); Mo en una sola linea
-        $this->middleware('auth',['except' => 'show']);
-        $this->middleware('roles:admin',['except' => ['edit','update','show']]);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -24,10 +15,17 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('users.index', compact('users'));
+        $divisiones = Division::pluck('nombre','id');
+        //eturn $divisiones;
+        return view('pruebas.index',compact('divisiones'));
     }
-
+    public function getAreas(Request $request,$id)
+    {
+        if ($request->ajax()) {
+            $areas = Area::areas($id);
+            return response()->json($areas);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -57,9 +55,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user=User::findOrFail($id);
-
-        return view('users.show',compact('user'));
+        //
     }
 
     /**
@@ -70,10 +66,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        $this->authorize('edit', $user);
-        $roles = Role::pluck('name','id');
-        return view('users.edit',compact('user','roles'));
+        //
     }
 
     /**
@@ -83,15 +76,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, $id)
+    public function update(Request $request, $id)
     {
-       // return $request->all();
-        $user=User::findOrFail($id);
-        $this->authorize('update', $user);
-        $user->update($request->all());
-        $user->roles()->sync($request->roles);
-        // $user->roles()->attach($request->roles); sync para evitar duplicados
-        return back()->with('info','Usuario actualizado');
+        //
     }
 
     /**
@@ -102,9 +89,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $user=User::findOrFail($id);
-        $this->authorize('destroy', $user);
-        $user->delete();
-         return back();
+        //
     }
 }

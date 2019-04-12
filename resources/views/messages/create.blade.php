@@ -7,11 +7,11 @@
 		<h3>{{ session('info') }}</h3>
 	@else
 		{{-- expr --}}
-	<form method="POST" action=" {{ route('mensajes.store') }}">
-		{{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
-		@include('messages.form',['message' => new App\Message])
+		<form method="POST" action=" {{ route('mensajes.store') }}">
+			{{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
+			@include('messages.form',['message' => new App\Message])
 
-	</form>
+		</form>
 	@endif
 
 @stop

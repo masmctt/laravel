@@ -55,6 +55,11 @@
  // 	return $user;
 
  // });
+route::resource('division','DivisionController');
+route::get('areas/{id}','DivisionController@getAreas');
+Route::get('pruebas',function(){
+	return view('pruebas');
+});
  Route::get('role',function ()
  {
  	// return \App\Role::all();
