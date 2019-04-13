@@ -22,7 +22,7 @@ class DivisionController extends Controller
     public function getAreas(Request $request,$id)
     {
         if ($request->ajax()) {
-            $areas = Area::areas($id);
+            $areas = Area::find($id)->areas($id);
             return response()->json($areas);
         }
     }

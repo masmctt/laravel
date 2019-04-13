@@ -46,11 +46,11 @@
  	// $user->password=bcrypt('123123');
  	// $user->save();
 
- // 	$user= new App\User;
- // 	$user->name='OtroAdmin';
- // 	$user->email='otroadmin@gmail.com';
- // 	$user->password=bcrypt('123123');
- // 	$user->save();
+ 	// $user= new App\User;
+ 	// $user->name='OtroAdmin';
+ 	// $user->email='otroadmin@gmail.com';
+ 	// $user->password=bcrypt('123123');
+ 	// $user->save();
 
  // 	return $user;
 
