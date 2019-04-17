@@ -9,7 +9,9 @@
 				<th>ID</th>
 				<th>Nombre</th>
 				<th>Email</th>
-				<th>role</th>
+				<th>Roles</th>
+				<th>Notas</th>
+				<th>Etiquetas</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
@@ -25,6 +27,8 @@
 							{{ $role->display_name }}
 						@endforeach --}}
 					</td>
+					<td>{{ $user->note->body ?? '' }}</td>
+					<td>{{ $user->tags->pluck('name')->implode(', ') ?? '' }}</td>
 					<td>
 						<a class="btn btn-info btn-sm" href="{{ route('usuarios.edit', $user->id ) }}">Editar</a>
 						<form style="display:inline" method="POST" action="{{ route('usuarios.destroy', $user->id) }}">

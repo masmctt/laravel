@@ -2,7 +2,8 @@
 		{{-- @if (auth()->guest()) --}}
 		{{-- @unless (isset($message) and $message->user_id) en el create mandar message vacio--}}
 		{{-- {{ dd(isset($message)) }} --}}
-		@unless ($message->user_id)
+		{{-- {{ dd($showFields) }} --}}
+		@if ($showFields)
 			{{-- expr --}}
 			<p><label for="nombre">
 				Nombre
@@ -14,7 +15,7 @@
 				<input class="form-control" type="email" name="email" value="{{ $message->email ?? old('email') }}">
 				{!! $errors->first('email','<span class=error>:message</span>') !!}
 			</label></p>
-		@endunless
+		@endif
 		<p><label for="mensaje">
 			Mensaje
 			<textarea class="form-control" name="mensaje">{{ $message->mensaje ?? old('mensaje') }}</textarea>

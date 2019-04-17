@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\Tag;
 use App\Role;
+use App\note;
 use App\Message;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -29,6 +31,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
 
     /**
      * The attributes that should be cast to native types.
@@ -66,6 +73,16 @@ class User extends Authenticatable
     public function messages()
     {
         return $this->hasMany(Message::class);
+    }
+
+    public function note()
+    {
+        return $this->morphOne(Note::class, 'notable');
+    }    
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class,'taggable')->withTimestamps();
     }
 
 }
