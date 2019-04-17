@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use App\Providers\MessageWasReceived;
 
 class MessagesController extends Controller
 {
@@ -115,14 +116,16 @@ class MessagesController extends Controller
        //     $m->to($message->email, $message->nombre)->subject('Tu mensaje fue recibido');
        //     $m->to('masmctt@gmail.com', 'Marco')->subject('Tu mensaje fue recibido');
        // });
-        Mail::send('emails.contact',['msg' => $message],function($m) use ($message){
 
-            $m->to($message->email, $message->nombre)->subject('Tu mensaje fue recibido');
-        });
+        Event(new MessageWasReceived($message));
 
-        // redireccionar
+        // Mail::send('emails.contact',['msg' => $message],function($m) use ($message){
+
+        //     $m->to($message->email, $message->nombre)->subject('Tu mensaje fue recibido');
+        // });
+
+        // // redireccionar
         return redirect()->route('mensajes.create')->with('info','Hemos recibido tu mensaje');
-
     }
 
     /**
